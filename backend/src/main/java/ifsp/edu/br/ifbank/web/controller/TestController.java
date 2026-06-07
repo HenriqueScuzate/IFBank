@@ -1,4 +1,4 @@
-package ifsp.edu.br.ifabank.web.controller;
+package ifsp.edu.br.ifbank.web.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
