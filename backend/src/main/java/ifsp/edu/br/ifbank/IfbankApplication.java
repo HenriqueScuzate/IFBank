@@ -1,4 +1,4 @@
-package ifsp.edu.br.ifbank.web;
+package ifsp.edu.br.ifbank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
