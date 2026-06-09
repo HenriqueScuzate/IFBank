@@ -2,25 +2,53 @@ package ifsp.edu.br.ifbank.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Cliente {
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "usuario")
+
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Long id;
 
+    @Column (length = 100, nullable = false)
     private String nome;
+
+    @Column (length = 14, nullable = false, unique = true)
+    private String cpf;
+
+    @Column (length = 50, nullable = false)
     private String email;
-    private String telefone;
-    private String endereco;
+
+    @Column (length = 255, nullable = false)
     private String senha;
 
+    @Column (length = 20, nullable = false)
+    private String telefone;
+
+    @Column (nullable = false)
+    private int numero_res;
+
+    @Column (length = 255, nullable = false)
     private String fotoUrl; // upload depois
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Conta> contas;
+    @Column (length = 20, nullable = false)
+    private String status;
+
+    @Column (nullable = false)
+    private LocalDateTime data_cadastro;
+
+    @ManyToOne
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<TokenResetSenha> tokensResetSenha;
 
     //getters e setters
     public Long getId() {
@@ -55,13 +83,6 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
 
     public String getSenha() {
         return senha;
@@ -77,13 +98,5 @@ public class Cliente {
 
     public void setFotoUrl(String fotoUrl) {
         this.fotoUrl = fotoUrl;
-    }
-
-    public List<Conta> getContas() {
-        return contas;
-    }
-
-    public void setContas(List<Conta> contas) {
-        this.contas = contas;
     }
 }

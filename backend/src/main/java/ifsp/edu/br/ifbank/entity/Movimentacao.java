@@ -1,6 +1,8 @@
 package ifsp.edu.br.ifbank.entity;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -8,14 +10,23 @@ public class Movimentacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_movimentacao")
     private Long id;
 
+    @Column(length = 50, nullable = false)
     private String tipo; // TRANSFERENCIA, INVESTIMENTO, DEPÓSITO, SAQUE
-    private Double valor;
-    private LocalDateTime data;
+
+    @Column(precision = 15, scale = 2, nullable = false)
+    private BigDecimal valor;
+
+    @Column(nullable = false)
+    private LocalDateTime data_hora;
+
+    @Column(length = 255)
+    private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "conta_id")
+    @JoinColumn(name = "id_conta", nullable = false)
     private Conta conta;
 
     //getters e setters
@@ -35,20 +46,12 @@ public class Movimentacao {
         this.tipo = tipo;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
-    }
-
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
     }
 
     public Conta getConta() {
@@ -57,5 +60,21 @@ public class Movimentacao {
 
     public void setConta(Conta conta) {
         this.conta = conta;
+    }
+
+    public LocalDateTime getData_hora() {
+        return data_hora;
+    }
+
+    public void setData_hora(LocalDateTime data_hora) {
+        this.data_hora = data_hora;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
