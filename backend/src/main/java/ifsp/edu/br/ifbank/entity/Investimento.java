@@ -1,4 +1,4 @@
-package ifsp.edu.br.ifbank.models;
+package ifsp.edu.br.ifbank.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

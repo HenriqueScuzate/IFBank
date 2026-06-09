@@ -1,0 +1,6 @@
+CREATE DATABASE ifbank;
+
+USE ifbank;
+
+SHOW TABLES;
+
