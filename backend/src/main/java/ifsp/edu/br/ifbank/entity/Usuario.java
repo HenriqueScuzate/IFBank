@@ -38,7 +38,7 @@ public class Usuario {
     private String fotoUrl; // upload depois
 
     @Column (length = 20, nullable = false)
-    private String status;
+    private String role;
 
     @Column (nullable = false)
     private LocalDateTime data_cadastro;
@@ -98,5 +98,53 @@ public class Usuario {
 
     public void setFotoUrl(String fotoUrl) {
         this.fotoUrl = fotoUrl;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public int getNumero_res() {
+        return numero_res;
+    }
+
+    public void setNumero_res(int numero_res) {
+        this.numero_res = numero_res;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public LocalDateTime getData_cadastro() {
+        return data_cadastro;
+    }
+
+    public void setData_cadastro(LocalDateTime data_cadastro) {
+        this.data_cadastro = data_cadastro;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<TokenResetSenha> getTokensResetSenha() {
+        return tokensResetSenha;
+    }
+
+    public void setTokensResetSenha(List<TokenResetSenha> tokensResetSenha) {
+        this.tokensResetSenha = tokensResetSenha;
     }
 }
