@@ -4,3 +4,4 @@ USE ifbank;
 
 SHOW TABLES;
 
+select * from cliente;
