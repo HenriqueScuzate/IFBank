@@ -1,6 +1,8 @@
 package ifsp.edu.br.ifbank.entity;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -8,16 +10,23 @@ public class Investimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_investimento")
     private Long id;
 
+    @Column(length = 30, nullable = false)
     private String tipo;
-    private Double valor;
-    private Double rendimento;
 
-    private LocalDateTime data;
+    @Column(precision = 15, scale = 2, nullable = false)
+    private BigDecimal valor_aplicado;
+
+    @Column(nullable = false)
+    private LocalDateTime data_aplicacao;
+
+    @Column(precision = 5, scale = 2, nullable = false)
+    private BigDecimal rendimento;
 
     @ManyToOne
-    @JoinColumn(name = "conta_id")
+    @JoinColumn(name = "id_conta", nullable = false)
     private Conta conta;
 
     public Long getId() {
@@ -36,28 +45,28 @@ public class Investimento {
         this.tipo = tipo;
     }
 
-    public Double getValor() {
-        return valor;
+    public BigDecimal getValor() {
+        return valor_aplicado;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setValor(BigDecimal valor) {
+        this.valor_aplicado = valor;
     }
 
-    public Double getRendimento() {
+    public BigDecimal getRendimento() {
         return rendimento;
     }
 
-    public void setRendimento(Double rendimento) {
+    public void setRendimento(BigDecimal rendimento) {
         this.rendimento = rendimento;
     }
 
     public LocalDateTime getData() {
-        return data;
+        return data_aplicacao;
     }
 
     public void setData(LocalDateTime data) {
-        this.data = data;
+        this.data_aplicacao = data;
     }
 
     public Conta getConta() {

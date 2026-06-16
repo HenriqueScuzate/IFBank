@@ -1,6 +1,8 @@
 package ifsp.edu.br.ifbank.entity;
 
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -8,17 +10,27 @@ public class Transferencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_transferencia")
     private Long id;
 
-    private Double valor;
-    private LocalDateTime data;
+    @Column(precision = 15, scale = 2, nullable = false)
+    private BigDecimal valor;
+
+    @Column(name = "data_transf", nullable = false)
+    private LocalDateTime dataTransferencia;
+
+    @Column(length = 255)
+    private String descricao;
+
+    @Column(length = 20, nullable = false)
+    private String situacao;
 
     @ManyToOne
-    @JoinColumn(name = "conta_origem_id")
+    @JoinColumn(name = "id_conta_origem", nullable = false)
     private Conta contaOrigem;
 
     @ManyToOne
-    @JoinColumn(name = "conta_destino_id")
+    @JoinColumn(name = "id_conta_destino", nullable = false)
     private Conta contaDestino;
 
     //getters e setters
@@ -30,20 +42,12 @@ public class Transferencia {
         this.id = id;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
-    }
-
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
     }
 
     public Conta getContaOrigem() {
@@ -60,5 +64,29 @@ public class Transferencia {
 
     public void setContaDestino(Conta contaDestino) {
         this.contaDestino = contaDestino;
+    }
+
+    public LocalDateTime getData_transf() {
+        return dataTransferencia;
+    }
+
+    public void setData_transf(LocalDateTime data_transf) {
+        this.dataTransferencia = data_transf;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
 }
