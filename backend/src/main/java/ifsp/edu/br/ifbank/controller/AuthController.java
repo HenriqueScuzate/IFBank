@@ -2,6 +2,7 @@ package ifsp.edu.br.ifbank.controller;
 
 import ifsp.edu.br.ifbank.dto.CadastroRequest;
 import ifsp.edu.br.ifbank.dto.LoginRequest;
+import ifsp.edu.br.ifbank.dto.LoginResponse;
 import ifsp.edu.br.ifbank.entity.Cliente;
 import ifsp.edu.br.ifbank.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,18 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    // Login
+    // LOGIN (corrigido IFB-36)
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
 
-        Cliente cliente = authService.login(request);
+        LoginResponse response = authService.login(request);
 
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.ok(response);
     }
 
-    // Cadastro
+    // CADASTRO (ainda retorna Cliente por enquanto)
     @PostMapping("/cadastro")
-    public ResponseEntity<?> cadastrar(@RequestBody CadastroRequest request) {
+    public ResponseEntity<Cliente> cadastrar(@RequestBody CadastroRequest request) {
 
         Cliente cliente = authService.cadastrar(request);
 
