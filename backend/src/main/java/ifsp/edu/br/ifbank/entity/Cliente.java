@@ -12,17 +12,24 @@ public class Cliente {
     private Long id;
 
     private String nome;
+    @Column(unique = true)
     private String email;
     private String telefone;
     private String endereco;
     private String senha;
 
-    private String fotoUrl; // upload depois
+    private String fotoUrl;
+
+    @Enumerated(EnumType.STRING)
+    private Perfil perfil = Perfil.CLIENTE;
+
+    private boolean aprovado = false;
 
     @OneToMany(mappedBy = "cliente")
     private List<Conta> contas;
 
-    //getters e setters
+    // Getters e Setters
+
     public Long getId() {
         return id;
     }
@@ -77,6 +84,22 @@ public class Cliente {
 
     public void setFotoUrl(String fotoUrl) {
         this.fotoUrl = fotoUrl;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+    public boolean isAprovado() {
+        return aprovado;
+    }
+
+    public void setAprovado(boolean aprovado) {
+        this.aprovado = aprovado;
     }
 
     public List<Conta> getContas() {
