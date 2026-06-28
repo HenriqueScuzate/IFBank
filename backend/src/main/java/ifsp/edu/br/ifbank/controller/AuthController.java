@@ -1,8 +1,8 @@
 package ifsp.edu.br.ifbank.controller;
 
 import ifsp.edu.br.ifbank.dto.CadastroRequest;
+import ifsp.edu.br.ifbank.dto.EsqueciSenhaRequest;
 import ifsp.edu.br.ifbank.dto.LoginRequest;
-import ifsp.edu.br.ifbank.dto.LoginResponse;
 import ifsp.edu.br.ifbank.entity.Cliente;
 import ifsp.edu.br.ifbank.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +17,36 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    // LOGIN (corrigido IFB-36)
+    // Login
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
-        LoginResponse response = authService.login(request);
+        Cliente cliente = authService.login(request);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(cliente);
     }
 
-    // CADASTRO (ainda retorna Cliente por enquanto)
+    // Cadastro
     @PostMapping("/cadastro")
-    public ResponseEntity<Cliente> cadastrar(@RequestBody CadastroRequest request) {
+    public ResponseEntity<?> cadastrar(@RequestBody CadastroRequest request) {
 
         Cliente cliente = authService.cadastrar(request);
 
         return ResponseEntity.ok(cliente);
+    }
+
+    // Logout
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        return ResponseEntity.ok("Logout realizado com sucesso.");
+    }
+
+    // Recuperação de senha
+    @PostMapping("/esqueci-senha")
+    public ResponseEntity<String> esqueciSenha(@RequestBody EsqueciSenhaRequest request) {
+
+        authService.recuperarSenha(request.getEmail());
+
+        return ResponseEntity.ok("Uma nova senha foi enviada para o seu e-mail.");
     }
 }
