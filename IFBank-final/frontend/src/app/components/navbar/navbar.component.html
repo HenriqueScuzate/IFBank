@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <span class="navbar-brand">IF<span>Bank</span></span>
+  <div class="navbar-links" *ngIf="cliente">
+    <ng-container *ngIf="cliente.perfil === 'GERENTE'">
+      <a routerLink="/gerente">Painel do Gerente</a>
+    </ng-container>
+    <ng-container *ngIf="cliente.perfil === 'CLIENTE'">
+      <a routerLink="/dashboard">Início</a>
+      <a routerLink="/conta">Minha Conta</a>
+      <a routerLink="/extrato">Extrato</a>
+      <a routerLink="/transferencia">Transferência</a>
+      <a routerLink="/investimentos">Investimentos</a>
+    </ng-container>
+    <span class="navbar-user">
+      <img *ngIf="fotoUrl" [src]="fotoUrl" class="navbar-foto" alt="foto" />
+      <span *ngIf="!fotoUrl" class="navbar-avatar">{{ inicial }}</span>
+      {{ cliente.nome }}
+    </span>
+    <button class="btn-logout" (click)="logout()">Sair</button>
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>IFBank</h2>
+    <h3>Recuperar Senha</h3>
+    <div *ngIf="mensagem" class="sucesso">{{ mensagem }}</div>
+    <div *ngIf="erro" class="erro">{{ erro }}</div>
+    <input type="email" placeholder="Seu e-mail" [(ngModel)]="email" />
+    <button (click)="recuperar()">Enviar nova senha</button>
+    <div class="links">
+      <a routerLink="/login">Voltar ao login</a>
+    </div>
+  </div>
+</div>

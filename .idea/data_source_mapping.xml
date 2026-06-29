@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/IFBank-final/backend/src/main/resources/database/schema_ifbank.sql" value="f54318b0-e43c-4d0e-a0ef-ca977f78bf7b" />
+  </component>
+</project>

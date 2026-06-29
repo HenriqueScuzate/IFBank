@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+
+  <div class="saldo-destaque" *ngIf="conta">
+    <div class="saldo-label">Saldo disponível</div>
+    <div class="saldo-valor">R$ {{ conta.saldo | number:'1.2-2' }}</div>
+    <div class="saldo-conta">Conta {{ conta.numeroConta }} · {{ conta.status }}</div>
+  </div>
+
+  <div class="card" *ngIf="cliente">
+    <div class="perfil-container">
+      <img *ngIf="fotoUrl" [src]="fotoUrl" class="perfil-foto" alt="foto" />
+      <div *ngIf="!fotoUrl" class="perfil-avatar">{{ inicial }}</div>
+      <div class="perfil-info">
+        <h3>{{ cliente.nome }}</h3>
+        <p>{{ cliente.email }}</p>
+        <p>{{ cliente.telefone }}</p>
+        <span class="badge badge-green">{{ cliente.perfil }}</span>
+      </div>
+    </div>
+
+    <h2>O que deseja fazer?</h2>
+    <div class="dashboard-grid">
+      <a routerLink="/conta" class="dashboard-card">
+        <div class="dc-icon">👤</div>
+        <div class="dc-label">Minha Conta</div>
+        <div class="dc-desc">Dados e foto de perfil</div>
+      </a>
+      <a routerLink="/extrato" class="dashboard-card">
+        <div class="dc-icon">📄</div>
+        <div class="dc-label">Extrato</div>
+        <div class="dc-desc">Histórico de movimentações</div>
+      </a>
+      <a routerLink="/transferencia" class="dashboard-card">
+        <div class="dc-icon">💸</div>
+        <div class="dc-label">Transferência</div>
+        <div class="dc-desc">Enviar para outra conta</div>
+      </a>
+      <a routerLink="/investimentos" class="dashboard-card">
+        <div class="dc-icon">📈</div>
+        <div class="dc-label">Investimentos</div>
+        <div class="dc-desc">Aplicar e resgatar</div>
+      </a>
+    </div>
+  </div>
+</div>
