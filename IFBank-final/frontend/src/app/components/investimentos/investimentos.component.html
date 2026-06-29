@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+  <div class="card">
+    <h2>Investimentos</h2>
+    <div *ngIf="mensagem" class="sucesso">{{ mensagem }}</div>
+    <div *ngIf="erro" class="erro">{{ erro }}</div>
+
+    <h3>Novo Investimento</h3>
+    <label>Tipo</label>
+    <select [(ngModel)]="tipo">
+      <option value="CDB">CDB</option>
+      <option value="LCI">LCI</option>
+      <option value="LCA">LCA</option>
+      <option value="Tesouro Direto">Tesouro Direto</option>
+    </select>
+    <label>Valor (R$)</label>
+    <input type="number" placeholder="0,00" [(ngModel)]="valor" step="0.01" />
+    <button class="btn" (click)="aplicar()">Aplicar</button>
+
+    <hr />
+    <h3>Meus Investimentos</h3>
+    <div *ngIf="investimentos.length === 0"><p>Nenhum investimento ativo.</p></div>
+    <table *ngIf="investimentos.length > 0">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Valor Aplicado</th>
+          <th>Data</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inv of investimentos">
+          <td>{{ inv.tipo }}</td>
+          <td>R$ {{ inv.valor | number:'1.2-2' }}</td>
+          <td>{{ inv.data | date:'dd/MM/yyyy' }}</td>
+          <td><button class="btn btn-sm" (click)="resgatar(inv.id)">Resgatar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

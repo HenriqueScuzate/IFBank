@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+  <div class="card">
+    <h2>Transferência</h2>
+    <div *ngIf="mensagem" class="sucesso">{{ mensagem }}</div>
+    <div *ngIf="erro" class="erro">{{ erro }}</div>
+    <label>Número da Conta de Destino</label>
+    <input type="text" placeholder="Ex: 6E9CC4C6" [(ngModel)]="numeroContaDestino" />
+    <label>Valor (R$)</label>
+    <input type="number" placeholder="0,00" [(ngModel)]="valor" step="0.01" />
+    <button class="btn" (click)="transferir()">Transferir</button>
+  </div>
+</div>

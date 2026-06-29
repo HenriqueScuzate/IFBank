@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+  <div class="card">
+    <h2>Painel do Gerente</h2>
+
+    <div *ngIf="mensagem" class="sucesso">{{ mensagem }}</div>
+    <div *ngIf="erro" class="erro">{{ erro }}</div>
+
+    <!-- Abas -->
+    <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
+      <button class="btn" [class.btn-secundario]="aba !== 'pendentes'" (click)="aba = 'pendentes'">
+        Pendentes ({{ pendentes.length }})
+      </button>
+      <button class="btn" [class.btn-secundario]="aba !== 'aprovados'" (click)="aba = 'aprovados'">
+        Clientes Aprovados ({{ aprovados.length }})
+      </button>
+    </div>
+
+    <!-- Pendentes -->
+    <ng-container *ngIf="aba === 'pendentes'">
+      <p *ngIf="pendentes.length === 0">Nenhum cliente pendente.</p>
+      <div class="cliente-card" *ngFor="let c of pendentes">
+        <div class="cliente-avatar">{{ inicial(c.nome) }}</div>
+        <div class="cliente-info">
+          <h4>{{ c.nome }}</h4>
+          <p>📧 {{ c.email }}</p>
+          <p>📱 {{ c.telefone }}</p>
+          <p>📍 {{ c.endereco }}</p>
+        </div>
+        <div class="cliente-acoes">
+          <button class="btn btn-aprovar btn-sm" (click)="aprovar(c.id)">Aprovar</button>
+          <button class="btn btn-rejeitar btn-sm" (click)="rejeitar(c.id)">Rejeitar</button>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Aprovados -->
+    <ng-container *ngIf="aba === 'aprovados'">
+      <p *ngIf="aprovados.length === 0">Nenhum cliente aprovado ainda.</p>
+      <div class="cliente-card" *ngFor="let c of aprovados">
+        <img *ngIf="fotoUrl(c)" [src]="fotoUrl(c)!" class="cliente-foto" alt="foto" />
+        <div *ngIf="!fotoUrl(c)" class="cliente-avatar">{{ inicial(c.nome) }}</div>
+        <div class="cliente-info">
+          <h4>{{ c.nome }}</h4>
+          <p>📧 {{ c.email }}</p>
+          <p>📱 {{ c.telefone }}</p>
+          <p>📍 {{ c.endereco }}</p>
+          <span class="badge badge-green">ATIVO</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

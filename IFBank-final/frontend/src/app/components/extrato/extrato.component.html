@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+  <div class="card">
+    <h2>Extrato</h2>
+    <div *ngIf="erro" class="erro">{{ erro }}</div>
+    <div *ngIf="movimentacoes.length === 0 && !erro">
+      <p>Nenhuma movimentação encontrada.</p>
+    </div>
+    <table *ngIf="movimentacoes.length > 0">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Tipo</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mov of movimentacoes" [class.negativo]="mov.valor < 0">
+          <td>{{ mov.data | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ mov.tipo }}</td>
+          <td [style.color]="mov.valor < 0 ? '#e53e3e' : '#38a169'">
+            R$ {{ mov.valor | number:'1.2-2' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

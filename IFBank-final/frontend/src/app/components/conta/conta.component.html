@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<div class="page-container">
+
+  <div *ngIf="mensagem" class="sucesso">{{ mensagem }}</div>
+  <div *ngIf="erro" class="erro">{{ erro }}</div>
+
+  <!-- Perfil -->
+  <div class="card" *ngIf="cliente">
+    <h2>Meu Perfil</h2>
+    <div class="perfil-container">
+      <img *ngIf="fotoUrl" [src]="fotoUrl" class="perfil-foto" alt="foto" />
+      <div *ngIf="!fotoUrl" class="perfil-avatar">{{ inicial }}</div>
+      <div class="perfil-info">
+        <h3>{{ cliente.nome }}</h3>
+        <p>{{ cliente.email }}</p>
+        <p>{{ cliente.telefone }}</p>
+        <p>{{ cliente.endereco }}</p>
+        <span class="badge badge-green">{{ cliente.perfil }}</span>
+      </div>
+    </div>
+
+    <!-- Upload foto -->
+    <h3>Alterar foto de perfil</h3>
+    <input type="file" accept="image/*" (change)="selecionarFoto($event)" />
+    <button class="btn" (click)="enviarFoto()" [disabled]="!fotoSelecionada">Enviar Foto</button>
+
+    <hr />
+
+    <!-- Editar dados -->
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3>Dados Pessoais</h3>
+      <button class="btn btn-secundario btn-sm" (click)="editando = !editando">
+        {{ editando ? 'Cancelar' : 'Editar' }}
+      </button>
+    </div>
+
+    <ng-container *ngIf="!editando">
+      <p><strong>Nome:</strong> {{ cliente.nome }}</p>
+      <p><strong>E-mail:</strong> {{ cliente.email }}</p>
+      <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+      <p><strong>Endereço:</strong> {{ cliente.endereco }}</p>
+    </ng-container>
+
+    <ng-container *ngIf="editando">
+      <label>Nome</label>
+      <input type="text" [(ngModel)]="nome" />
+      <label>Telefone</label>
+      <input type="text" [(ngModel)]="telefone" />
+      <label>Endereço</label>
+      <input type="text" [(ngModel)]="endereco" />
+      <label>Nova senha (deixe em branco para manter)</label>
+      <input type="password" [(ngModel)]="novaSenha" placeholder="Nova senha" />
+      <button class="btn" (click)="salvarEdicao()">Salvar Alterações</button>
+    </ng-container>
+  </div>
+
+  <!-- Conta bancária -->
+  <div class="card" *ngIf="conta">
+    <h2>Conta Bancária</h2>
+    <div class="saldo-destaque">
+      <div class="saldo-label">Saldo disponível</div>
+      <div class="saldo-valor">R$ {{ conta.saldo | number:'1.2-2' }}</div>
+      <div class="saldo-conta">Conta {{ conta.numeroConta }} · {{ conta.status }}</div>
+    </div>
+
+    <h3>Realizar Depósito</h3>
+    <label>Valor (R$)</label>
+    <input type="number" placeholder="0,00" [(ngModel)]="valorDeposito" step="0.01" min="0.01" />
+    <button class="btn btn-deposito" (click)="depositar()">Depositar</button>
+  </div>
+
+</div>

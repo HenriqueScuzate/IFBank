@@ -1,0 +1,14 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>IFBank</h2>
+    <h3>Login</h3>
+    <div *ngIf="erro" class="erro">{{ erro }}</div>
+    <input type="email" placeholder="E-mail" [(ngModel)]="email" />
+    <input type="password" placeholder="Senha" [(ngModel)]="senha" />
+    <button (click)="login()">Entrar</button>
+    <div class="links">
+      <a routerLink="/cadastro">Criar conta</a>
+      <a routerLink="/esqueci-senha">Esqueci minha senha</a>
+    </div>
+  </div>
+</div>
