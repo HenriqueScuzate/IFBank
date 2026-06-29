@@ -1,5 +1,6 @@
 package ifsp.edu.br.ifbank.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,10 +13,14 @@ public class Cliente {
     private Long id;
 
     private String nome;
+
     @Column(unique = true)
     private String email;
+
     private String telefone;
     private String endereco;
+
+    @JsonIgnore
     private String senha;
 
     private String fotoUrl;
@@ -26,87 +31,36 @@ public class Cliente {
     private boolean aprovado = false;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Conta> contas;
 
-    // Getters e Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getEndereco() { return endereco; }
+    public void setEndereco(String endereco) { this.endereco = endereco; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getFotoUrl() { return fotoUrl; }
+    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
 
-    public String getTelefone() {
-        return telefone;
-    }
+    public Perfil getPerfil() { return perfil; }
+    public void setPerfil(Perfil perfil) { this.perfil = perfil; }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+    public boolean isAprovado() { return aprovado; }
+    public void setAprovado(boolean aprovado) { this.aprovado = aprovado; }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getFotoUrl() {
-        return fotoUrl;
-    }
-
-    public void setFotoUrl(String fotoUrl) {
-        this.fotoUrl = fotoUrl;
-    }
-
-    public Perfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
-    }
-
-    public boolean isAprovado() {
-        return aprovado;
-    }
-
-    public void setAprovado(boolean aprovado) {
-        this.aprovado = aprovado;
-    }
-
-    public List<Conta> getContas() {
-        return contas;
-    }
-
-    public void setContas(List<Conta> contas) {
-        this.contas = contas;
-    }
+    public List<Conta> getContas() { return contas; }
+    public void setContas(List<Conta> contas) { this.contas = contas; }
 }

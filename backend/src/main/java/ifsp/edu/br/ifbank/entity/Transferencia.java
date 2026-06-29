@@ -1,6 +1,7 @@
 package ifsp.edu.br.ifbank.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,44 +22,18 @@ public class Transferencia {
     @JoinColumn(name = "conta_destino_id")
     private Conta contaDestino;
 
-    //getters e setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Double getValor() { return valor; }
+    public void setValor(Double valor) { this.valor = valor; }
 
-    public Double getValor() {
-        return valor;
-    }
+    public LocalDateTime getData() { return data; }
+    public void setData(LocalDateTime data) { this.data = data; }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
+    public Conta getContaOrigem() { return contaOrigem; }
+    public void setContaOrigem(Conta contaOrigem) { this.contaOrigem = contaOrigem; }
 
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
-
-    public Conta getContaOrigem() {
-        return contaOrigem;
-    }
-
-    public void setContaOrigem(Conta contaOrigem) {
-        this.contaOrigem = contaOrigem;
-    }
-
-    public Conta getContaDestino() {
-        return contaDestino;
-    }
-
-    public void setContaDestino(Conta contaDestino) {
-        this.contaDestino = contaDestino;
-    }
+    public Conta getContaDestino() { return contaDestino; }
+    public void setContaDestino(Conta contaDestino) { this.contaDestino = contaDestino; }
 }
